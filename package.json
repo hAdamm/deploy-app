@@ -2,7 +2,7 @@
   "name": "deploy-app",
   "version": "0.0.1",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc",
     "start": "nodemon dist/index.js",
     "watch": "tsc -w"
   },

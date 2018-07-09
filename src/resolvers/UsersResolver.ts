@@ -10,13 +10,17 @@ class UsersResolver {
     @Inject("db")
     public db: SqlStorage;
 
-    @Query(returns => UserIdentity)
+    @Mutation(returns => UserIdentity)
     public async login(@Arg("login") login: string, @Arg("password") password: string): Promise<UserIdentity> {
         const user = await this.db.manager.findOne(UserIdentity, {
             where: `login='${login}' AND password='${password}'`,
         });
-        console.log(user);
         return user;
+    }
+
+    @Query(returns => [UserIdentity])
+    public async users(): Promise<UserIdentity[]> {
+        return await this.db.manager.find(UserIdentity);
     }
 
 }
